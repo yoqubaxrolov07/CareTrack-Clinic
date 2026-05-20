@@ -28,22 +28,26 @@ ALTER TABLE users     AUTO_INCREMENT = 1;
 
 
 -- ----------------------- users -----------------------
--- Pre-hashed bcrypt passwords (10 salt rounds).
+-- Bcrypt passwords (10 salt rounds). Actual passwords:
+--   admin       -> Admin@123
+--   dr_smith    -> Clinic@123
+--   dr_lee      -> Clinic@123
+--   reception   -> Recep@123
 INSERT INTO users (username, email, password_hash, full_name, role) VALUES
   ('admin',    'admin@caretrack.test',
-   '$2a$10$wH8Q1bJv1mYy7uS4uS5oxeQK1pZ3z8qC0o3oQk7jXqkZ2h4GgP3qS',
+   '$2a$10$KvOmlaaBMB38o7XR0hETJOapHP4oXYIu/JyoztMQcpGoVvLA/tYxW',
    'System Administrator', 'admin'),
 
   ('dr_smith', 'smith@caretrack.test',
-   '$2a$10$wH8Q1bJv1mYy7uS4uS5oxeQK1pZ3z8qC0o3oQk7jXqkZ2h4GgP3qS',
+   '$2a$10$bn.Qe3fSIbiKKJoUfISWmOs.CrNV2GGjAjljjmfEzM7NEiBmEgnHq',
    'Dr. John Smith', 'clinician'),
 
   ('dr_lee',   'lee@caretrack.test',
-   '$2a$10$wH8Q1bJv1mYy7uS4uS5oxeQK1pZ3z8qC0o3oQk7jXqkZ2h4GgP3qS',
+   '$2a$10$bn.Qe3fSIbiKKJoUfISWmOs.CrNV2GGjAjljjmfEzM7NEiBmEgnHq',
    'Dr. Sarah Lee', 'clinician'),
 
   ('reception','reception@caretrack.test',
-   '$2a$10$wH8Q1bJv1mYy7uS4uS5oxeQK1pZ3z8qC0o3oQk7jXqkZ2h4GgP3qS',
+   '$2a$10$FzCtwqxG4BDdy5namFJoO.CTB.T1iUvqgwlTL00MsvaaD3KmZGmcK',
    'Front Desk', 'receptionist');
 
 
