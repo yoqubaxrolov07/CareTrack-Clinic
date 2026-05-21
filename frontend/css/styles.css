@@ -40,6 +40,7 @@ body {
   background: var(--bg);
   line-height: 1.5;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 a { color: var(--accent); text-decoration: none; }
@@ -176,6 +177,8 @@ button { cursor: pointer; font-family: var(--font); }
   flex: 1;
   padding: 24px 32px;
   min-height: 100vh;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 /* ===== PAGE HEADER ===== */
@@ -241,6 +244,7 @@ button { cursor: pointer; font-family: var(--font); }
   border-radius: var(--radius);
   box-shadow: var(--card-shadow);
   overflow: hidden;
+  max-width: 100%;
 }
 
 .content-card-header {
@@ -258,6 +262,8 @@ button { cursor: pointer; font-family: var(--font); }
 
 .content-card-body {
   padding: 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ===== TOOLBAR (search + buttons) ===== */
@@ -298,6 +304,7 @@ button { cursor: pointer; font-family: var(--font); }
 .data-table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 600px;
 }
 
 .data-table thead {
