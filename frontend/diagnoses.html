@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnoses - CareTrack Clinic</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>🏥 CareTrack</h2>
+        <p>Medical Record System</p>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html"><span class="icon">📊</span> Dashboard</a>
+        <a href="doctors.html"><span class="icon">👨‍⚕️</span> Doctors</a>
+        <a href="patients.html"><span class="icon">🏥</span> Patients</a>
+        <a href="diagnoses.html" class="active" data-roles="admin,clinician"><span class="icon">🩺</span> Diagnoses</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="user-avatar">A</div>
+          <div>
+            <div class="user-name">Admin</div>
+            <div class="user-role">admin</div>
+          </div>
+        </div>
+        <button class="btn-logout" onclick="logout()">Sign Out</button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Diagnoses</h1>
+        <p>Disease/Diagnosis records — ICD code, description, severity and linked patient</p>
+      </div>
+
+      <!-- STATS -->
+      <div class="stats-grid">
+        <div class="stat-card warning">
+          <h3>Active</h3>
+          <div class="stat-value" id="statActive">—</div>
+          <div class="stat-label">Ongoing conditions</div>
+        </div>
+        <div class="stat-card success">
+          <h3>Resolved</h3>
+          <div class="stat-value" id="statResolved">—</div>
+          <div class="stat-label">Successfully treated</div>
+        </div>
+        <div class="stat-card info">
+          <h3>Total Records</h3>
+          <div class="stat-value" id="statTotal">—</div>
+          <div class="stat-label">All diagnoses</div>
+        </div>
+      </div>
+
+      <!-- TABLE CARD -->
+      <div class="content-card">
+        <div class="toolbar">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Search by ICD code or description...">
+          </div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <select id="statusFilter" class="form-control" style="width:140px; padding:8px;">
+              <option value="">All status</option>
+              <option value="active">Active</option>
+              <option value="resolved">Resolved</option>
+            </select>
+            <button class="btn btn-primary" id="btnAddDiagnosis" data-roles="admin,clinician">
+              + Add Diagnosis
+            </button>
+          </div>
+        </div>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Patient</th>
+              <th>ICD Code</th>
+              <th>Description</th>
+              <th>Severity</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="diagnosesTableBody">
+            <tr><td colspan="8" class="empty-state">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- ADD/EDIT DIAGNOSIS MODAL -->
+  <div class="modal-overlay" id="diagnosisModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">Add Diagnosis</h3>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="diagnosisForm">
+          <input type="hidden" id="diagnosisId">
+          <div class="form-group">
+            <label>Patient <span class="required">*</span></label>
+            <select id="patientSelect" class="form-control" required>
+              <option value="">Select patient</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>ICD Code <span class="required">*</span></label>
+              <input type="text" id="icdCode" class="form-control" placeholder="e.g. I10, E11.9" required>
+            </div>
+            <div class="form-group">
+              <label>Diagnosed Date <span class="required">*</span></label>
+              <input type="date" id="diagnosedAt" class="form-control" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Description <span class="required">*</span></label>
+            <input type="text" id="description" class="form-control"
+                   placeholder="e.g. Essential hypertension" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Severity <span class="required">*</span></label>
+              <select id="severity" class="form-control" required>
+                <option value="">Select</option>
+                <option value="mild">Mild</option>
+                <option value="moderate">Moderate</option>
+                <option value="severe">Severe</option>
+                <option value="critical">Critical</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Status</label>
+              <select id="status" class="form-control">
+                <option value="active">Active</option>
+                <option value="resolved">Resolved</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Treatment</label>
+            <textarea id="treatment" class="form-control" rows="3"
+                      placeholder="Prescribed treatment, notes..."></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" id="btnSaveDiagnosis">Save Diagnosis</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/diagnoses.js"></script>
+</body>
+</html>

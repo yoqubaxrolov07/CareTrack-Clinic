@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctors - CareTrack Clinic</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>🏥 CareTrack</h2>
+        <p>Medical Record System</p>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html">
+          <span class="icon">📊</span> Dashboard
+        </a>
+        <a href="doctors.html" class="active">
+          <span class="icon">👨‍⚕️</span> Doctors
+        </a>
+        <a href="patients.html">
+          <span class="icon">🏥</span> Patients
+        </a>
+        <a href="diagnoses.html" data-roles="admin,clinician">
+          <span class="icon">🩺</span> Diagnoses
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="user-avatar">A</div>
+          <div>
+            <div class="user-name">Admin</div>
+            <div class="user-role">admin</div>
+          </div>
+        </div>
+        <button class="btn-logout" onclick="logout()">Sign Out</button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Doctors</h1>
+        <p>Manage doctor profiles — name, specialty, department and contact details</p>
+      </div>
+
+      <!-- STATS -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h3>Total Doctors</h3>
+          <div class="stat-value" id="statTotal">—</div>
+          <div class="stat-label">Registered in system</div>
+        </div>
+        <div class="stat-card info">
+          <h3>Departments</h3>
+          <div class="stat-value" id="statDepts">—</div>
+          <div class="stat-label">Active departments</div>
+        </div>
+      </div>
+
+      <!-- TABLE CARD -->
+      <div class="content-card">
+        <div class="toolbar">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Search doctors...">
+          </div>
+          <button class="btn btn-primary" id="btnAddDoctor" data-roles="admin">
+            + Add Doctor
+          </button>
+        </div>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Full Name</th>
+              <th>Specialty</th>
+              <th>Department</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="doctorsTableBody">
+            <tr><td colspan="7" class="empty-state">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- ADD/EDIT DOCTOR MODAL -->
+  <div class="modal-overlay" id="doctorModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">Add Doctor</h3>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="doctorForm">
+          <input type="hidden" id="doctorId">
+          <div class="form-group">
+            <label>Full Name <span class="required">*</span></label>
+            <input type="text" id="fullName" class="form-control"
+                   placeholder="e.g. Dr. John Smith" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Specialty <span class="required">*</span></label>
+              <select id="specialty" class="form-control" required>
+                <option value="">Select specialty</option>
+                <option value="General Practice">General Practice</option>
+                <option value="Cardiology">Cardiology</option>
+                <option value="Neurology">Neurology</option>
+                <option value="Dermatology">Dermatology</option>
+                <option value="Orthopaedics">Orthopaedics</option>
+                <option value="Pediatrics">Pediatrics</option>
+                <option value="Diagnostics">Diagnostics</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Department <span class="required">*</span></label>
+              <select id="department" class="form-control" required>
+                <option value="">Select department</option>
+                <option value="General Medicine Dept.">General Medicine Dept.</option>
+                <option value="Cardiology Dept.">Cardiology Dept.</option>
+                <option value="Neurology Dept.">Neurology Dept.</option>
+                <option value="Dermatology Dept.">Dermatology Dept.</option>
+                <option value="Orthopaedics Dept.">Orthopaedics Dept.</option>
+                <option value="Pediatrics Dept.">Pediatrics Dept.</option>
+                <option value="Diagnostic Services Dept.">Diagnostic Services Dept.</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email <span class="required">*</span></label>
+              <input type="email" id="doctorEmail" class="form-control"
+                     placeholder="doctor@caretrack.test" required>
+            </div>
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="text" id="doctorPhone" class="form-control"
+                     placeholder="+998-90-XXX-XXXX">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" id="btnSaveDoctor">Save Doctor</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW DOCTOR MODAL -->
+  <div class="modal-overlay" id="viewDoctorModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Doctor Details</h3>
+        <button class="modal-close" onclick="closeViewModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="viewDoctorContent">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeViewModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/doctors.js"></script>
+</body>
+</html>

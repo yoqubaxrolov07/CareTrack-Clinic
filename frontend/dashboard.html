@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - CareTrack Clinic</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>🏥 CareTrack</h2>
+        <p>Medical Record System</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="active">
+          <span class="icon">📊</span> Dashboard
+        </a>
+        <a href="doctors.html">
+          <span class="icon">👨‍⚕️</span> Doctors
+        </a>
+        <a href="patients.html">
+          <span class="icon">🏥</span> Patients
+        </a>
+        <a href="diagnoses.html" data-roles="admin,clinician">
+          <span class="icon">🩺</span> Diagnoses
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="user-avatar">A</div>
+          <div>
+            <div class="user-name">Admin</div>
+            <div class="user-role">admin</div>
+          </div>
+        </div>
+        <button class="btn-logout" onclick="logout()">Sign Out</button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Dashboard</h1>
+        <p>Welcome back, <span id="welcomeName">User</span>!</p>
+      </div>
+
+      <!-- STATS -->
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card">
+          <h3>Doctors</h3>
+          <div class="stat-value" id="statDoctors">—</div>
+          <div class="stat-label">Total registered</div>
+        </div>
+        <div class="stat-card info">
+          <h3>Patients</h3>
+          <div class="stat-value" id="statPatients">—</div>
+          <div class="stat-label">Total registered</div>
+        </div>
+        <div class="stat-card warning">
+          <h3>Active Diagnoses</h3>
+          <div class="stat-value" id="statActiveDx">—</div>
+          <div class="stat-label">Needs attention</div>
+        </div>
+        <div class="stat-card success">
+          <h3>Resolved</h3>
+          <div class="stat-value" id="statResolvedDx">—</div>
+          <div class="stat-label">Successfully treated</div>
+        </div>
+      </div>
+
+      <!-- RECENT PATIENTS -->
+      <div class="content-card">
+        <div class="content-card-header">
+          <h2>Recent Patients</h2>
+          <a href="patients.html" class="btn btn-outline btn-sm">View All</a>
+        </div>
+        <div class="content-card-body">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Blood Group</th>
+                <th>Assigned Doctor</th>
+              </tr>
+            </thead>
+            <tbody id="recentPatientsBody">
+              <tr><td colspan="4" class="empty-state">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
