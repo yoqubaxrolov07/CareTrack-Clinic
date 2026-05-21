@@ -49,7 +49,7 @@ async function loadDoctorsList() {
 function renderTable(patients) {
   if (!patients.length) {
     tbody.innerHTML = `<tr><td colspan="8" class="empty-state">
-      <div class="icon">🏥</div><p>No patients found</p>
+      <div class="icon"><i data-lucide="users" style="width:48px;height:48px;color:var(--text-muted);"></i></div><p>No patients found</p>
     </td></tr>`;
     return;
   }
@@ -70,13 +70,14 @@ function renderTable(patients) {
       <td>${doctor ? doctor.full_name : '<span style="color:#999">Unassigned</span>'}</td>
       <td>
         <div class="action-btns">
-          <button class="btn btn-outline btn-sm" onclick="viewProfile(${p.id})" title="Full Profile">👁️</button>
-          ${canEdit ? `<button class="btn btn-primary btn-sm" onclick="editPatient(${p.id})" title="Edit">✏️</button>` : ''}
-          ${canDelete ? `<button class="btn btn-danger btn-sm" onclick="removePatient(${p.id})" title="Delete">🗑️</button>` : ''}
+          <button class="btn btn-outline btn-sm" onclick="viewProfile(${p.id})" title="Full Profile"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
+          ${canEdit ? `<button class="btn btn-primary btn-sm" onclick="editPatient(${p.id})" title="Edit"><i data-lucide="pencil" style="width:14px;height:14px;"></i></button>` : ''}
+          ${canDelete ? `<button class="btn btn-danger btn-sm" onclick="removePatient(${p.id})" title="Delete"><i data-lucide="trash-2" style="width:14px;height:14px;"></i></button>` : ''}
         </div>
       </td>
     </tr>`;
   }).join('');
+  if (window.lucide) lucide.createIcons();
 }
 
 // ===== SEARCH =====

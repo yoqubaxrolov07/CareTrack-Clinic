@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - CareTrack Clinic</title>
   <link rel="stylesheet" href="css/styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
   <div class="login-page">
     <div class="login-card">
       <div class="logo">
-        <h1>🏥 CareTrack Clinic</h1>
+        <i data-lucide="heart-pulse" style="width:48px;height:48px;color:var(--accent);margin-bottom:12px;"></i>
+        <h1>CareTrack Clinic</h1>
         <p>Medical Record Management System</p>
       </div>
 
@@ -43,5 +45,6 @@
   <script src="js/api.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/login.js"></script>
+  <script>lucide.createIcons();</script>
 </body>
 </html>

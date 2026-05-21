@@ -52,7 +52,7 @@ async function loadPatientsList() {
 function renderTable(diagnoses) {
   if (!diagnoses.length) {
     tbody.innerHTML = `<tr><td colspan="8" class="empty-state">
-      <div class="icon">🩺</div><p>No diagnoses found</p>
+      <div class="icon"><i data-lucide="file-text" style="width:48px;height:48px;color:var(--text-muted);"></i></div><p>No diagnoses found</p>
     </td></tr>`;
     return;
   }
@@ -74,12 +74,13 @@ function renderTable(diagnoses) {
       <td>${formatDate(dx.diagnosed_at)}</td>
       <td>
         <div class="action-btns">
-          ${canEdit ? `<button class="btn btn-primary btn-sm" onclick="editDiagnosis(${dx.id})" title="Edit">✏️</button>` : ''}
-          ${canDelete ? `<button class="btn btn-danger btn-sm" onclick="removeDiagnosis(${dx.id})" title="Delete">🗑️</button>` : ''}
+          ${canEdit ? `<button class="btn btn-primary btn-sm" onclick="editDiagnosis(${dx.id})" title="Edit"><i data-lucide="pencil" style="width:14px;height:14px;"></i></button>` : ''}
+          ${canDelete ? `<button class="btn btn-danger btn-sm" onclick="removeDiagnosis(${dx.id})" title="Delete"><i data-lucide="trash-2" style="width:14px;height:14px;"></i></button>` : ''}
         </div>
       </td>
     </tr>`;
   }).join('');
+  if (window.lucide) lucide.createIcons();
 }
 
 // ===== SEARCH & FILTER =====

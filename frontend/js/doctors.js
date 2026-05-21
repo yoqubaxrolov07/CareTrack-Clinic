@@ -34,9 +34,10 @@ function renderTable(doctors) {
   if (!doctors.length) {
     tbody.innerHTML = `
       <tr><td colspan="7" class="empty-state">
-        <div class="icon">👨‍⚕️</div>
+        <div class="icon"><i data-lucide="stethoscope" style="width:48px;height:48px;color:var(--text-muted);"></i></div>
         <p>No doctors found</p>
       </td></tr>`;
+    if (window.lucide) lucide.createIcons();
     return;
   }
 
@@ -51,15 +52,16 @@ function renderTable(doctors) {
       <td>${d.phone || '—'}</td>
       <td>
         <div class="action-btns">
-          <button class="btn btn-outline btn-sm" onclick="viewDoctor(${d.id})" title="View">👁️</button>
+          <button class="btn btn-outline btn-sm" onclick="viewDoctor(${d.id})" title="View"><i data-lucide="eye" style="width:14px;height:14px;"></i></button>
           ${isAdmin ? `
-            <button class="btn btn-primary btn-sm" onclick="editDoctor(${d.id})" title="Edit">✏️</button>
-            <button class="btn btn-danger btn-sm" onclick="removeDoctor(${d.id})" title="Delete">🗑️</button>
+            <button class="btn btn-primary btn-sm" onclick="editDoctor(${d.id})" title="Edit"><i data-lucide="pencil" style="width:14px;height:14px;"></i></button>
+            <button class="btn btn-danger btn-sm" onclick="removeDoctor(${d.id})" title="Delete"><i data-lucide="trash-2" style="width:14px;height:14px;"></i></button>
           ` : ''}
         </div>
       </td>
     </tr>
   `).join('');
+  if (window.lucide) lucide.createIcons();
 }
 
 // ===== SEARCH =====

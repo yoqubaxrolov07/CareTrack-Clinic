@@ -5,20 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Diagnoses - CareTrack Clinic</title>
   <link rel="stylesheet" href="css/styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
   <div class="app-layout">
     <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="sidebar-header">
-        <h2>🏥 CareTrack</h2>
+        <h2><i data-lucide="heart-pulse" style="width:20px;height:20px;vertical-align:middle;"></i> CareTrack</h2>
         <p>Medical Record System</p>
       </div>
       <nav class="sidebar-nav">
-        <a href="dashboard.html"><span class="icon">📊</span> Dashboard</a>
-        <a href="doctors.html"><span class="icon">👨‍⚕️</span> Doctors</a>
-        <a href="patients.html"><span class="icon">🏥</span> Patients</a>
-        <a href="diagnoses.html" class="active" data-roles="admin,clinician"><span class="icon">🩺</span> Diagnoses</a>
+        <a href="dashboard.html"><span class="icon"><i data-lucide="layout-dashboard"></i></span> Dashboard</a>
+        <a href="doctors.html"><span class="icon"><i data-lucide="stethoscope"></i></span> Doctors</a>
+        <a href="patients.html"><span class="icon"><i data-lucide="users"></i></span> Patients</a>
+        <a href="diagnoses.html" class="active" data-roles="admin,clinician"><span class="icon"><i data-lucide="file-text"></i></span> Diagnoses</a>
       </nav>
       <div class="sidebar-footer">
         <div class="user-info">
@@ -62,7 +63,7 @@
       <div class="content-card">
         <div class="toolbar">
           <div class="search-box">
-            <span class="search-icon">🔍</span>
+            <span class="search-icon"><i data-lucide="search" style="width:16px;height:16px;"></i></span>
             <input type="text" id="searchInput" placeholder="Search by ICD code or description...">
           </div>
           <div style="display:flex; gap:8px; align-items:center;">
@@ -72,7 +73,7 @@
               <option value="resolved">Resolved</option>
             </select>
             <button class="btn btn-primary" id="btnAddDiagnosis" data-roles="admin,clinician">
-              + Add Diagnosis
+              <i data-lucide="plus" style="width:16px;height:16px;"></i> Add Diagnosis
             </button>
           </div>
         </div>
@@ -165,5 +166,6 @@
   <script src="js/api.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/diagnoses.js"></script>
+  <script>lucide.createIcons();</script>
 </body>
 </html>
