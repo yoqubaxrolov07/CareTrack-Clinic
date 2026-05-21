@@ -5,10 +5,10 @@
 
 /* ===== CSS VARIABLES ===== */
 :root {
-  --primary: #00473e;        /* dark teal - sidebar */
-  --primary-light: #006d5b;  /* lighter teal - hover */
-  --accent: #009688;         /* teal accent */
-  --accent-light: #e0f2f1;   /* very light teal bg */
+  --primary: #1a5c3a;        /* dark green - sidebar */
+  --primary-light: #288F53;  /* medium green - hover */
+  --accent: #2A7B9B;         /* teal-blue accent */
+  --accent-light: #e6f4f1;   /* very light teal bg */
   --white: #ffffff;
   --bg: #f4f6f9;             /* page background */
   --text: #333333;
@@ -57,7 +57,7 @@ button { cursor: pointer; font-family: var(--font); }
 /* ===== SIDEBAR ===== */
 .sidebar {
   width: var(--sidebar-width);
-  background: var(--primary);
+  background: linear-gradient(180deg, #2A7B9B 0%, #288F53 50%, #1a5c3a 100%);
   color: var(--white);
   display: flex;
   flex-direction: column;
@@ -567,7 +567,7 @@ select.form-control {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  background: linear-gradient(135deg, #2A7B9B 0%, #288F53 60%, #1a5c3a 100%);
 }
 
 .login-card {
@@ -681,7 +681,7 @@ select.form-control {
   top: 12px;
   left: 12px;
   z-index: 200;
-  background: var(--primary);
+  background: linear-gradient(135deg, #2A7B9B, #288F53);
   color: var(--white);
   border: none;
   border-radius: 8px;
