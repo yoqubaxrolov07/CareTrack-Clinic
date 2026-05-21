@@ -667,8 +667,65 @@ select.form-control {
   font-size: 13px;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===== HAMBURGER MENU BUTTON ===== */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 200;
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+/* Sidebar overlay for mobile */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 90;
+}
+
+.sidebar-overlay.active {
+  display: block;
+}
+
+/* ===== TABLE RESPONSIVE WRAPPER ===== */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ===== RESPONSIVE - TABLET ===== */
+@media (max-width: 1024px) {
+  .main-content {
+    padding: 20px;
+  }
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .data-table th,
+  .data-table td {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+}
+
+/* ===== RESPONSIVE - MOBILE ===== */
 @media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
   .sidebar {
     transform: translateX(-100%);
   }
@@ -678,9 +735,20 @@ select.form-control {
   .main-content {
     margin-left: 0;
     padding: 16px;
+    padding-top: 60px;
+  }
+  .page-header h1 {
+    font-size: 20px;
   }
   .stats-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .stat-card {
+    padding: 14px;
+  }
+  .stat-card .stat-value {
+    font-size: 22px;
   }
   .form-row {
     grid-template-columns: 1fr;
@@ -691,5 +759,51 @@ select.form-control {
   .toolbar {
     flex-direction: column;
     align-items: stretch;
+    gap: 10px;
+  }
+  .search-box {
+    min-width: unset;
+    width: 100%;
+  }
+  .content-card {
+    border-radius: 6px;
+  }
+  .data-table th,
+  .data-table td {
+    padding: 8px 10px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .modal {
+    width: 95%;
+    max-height: 90vh;
+    margin: 10px;
+  }
+  .modal-body {
+    padding: 16px;
+  }
+  .content-card-body {
+    padding: 0;
+    overflow-x: auto;
+  }
+  .action-btns {
+    flex-wrap: nowrap;
+  }
+  .btn-sm {
+    padding: 4px 6px;
+  }
+}
+
+/* ===== RESPONSIVE - SMALL MOBILE ===== */
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .login-card {
+    padding: 24px;
+    margin: 16px;
+  }
+  .login-card .logo h1 {
+    font-size: 20px;
   }
 }

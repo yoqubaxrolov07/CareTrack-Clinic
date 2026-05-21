@@ -89,5 +89,38 @@ function setupSidebar() {
 function initPage() {
   if (!requireAuth()) return false;
   setupSidebar();
+  setupMobileMenu();
   return true;
+}
+
+// ===== MOBILE MENU =====
+function setupMobileMenu() {
+  // Create hamburger button if not exists
+  if (!document.querySelector('.menu-toggle')) {
+    const btn = document.createElement('button');
+    btn.className = 'menu-toggle';
+    btn.innerHTML = '<i data-lucide="menu" style="width:22px;height:22px;"></i>';
+    btn.setAttribute('aria-label', 'Toggle menu');
+    document.body.appendChild(btn);
+
+    // Create overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'sidebar-overlay';
+    document.body.appendChild(overlay);
+
+    const sidebar = document.querySelector('.sidebar');
+
+    btn.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('active');
+    });
+
+    overlay.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+    });
+
+    // Re-render lucide icons for the hamburger
+    if (window.lucide) lucide.createIcons();
+  }
 }
