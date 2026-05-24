@@ -5,11 +5,14 @@ if (!initPage()) throw new Error('Not authenticated');
 const user = getUser();
 document.getElementById('welcomeName').textContent = user.full_name || user.username;
 
+let doctorsList = [];
+
 // Load stats
 async function loadDashboard() {
   try {
-    // Load doctors count
+    // Load doctors first (we need them to map names to IDs)
     const doctorsRes = await getDoctors();
+    doctorsList = doctorsRes.data || [];
     document.getElementById('statDoctors').textContent = doctorsRes.count || 0;
 
     // Load patients count
@@ -40,14 +43,20 @@ function renderRecentPatients(patients) {
     tbody.innerHTML = '<tr><td colspan="4" class="empty-state">No patients found</td></tr>';
     return;
   }
-  tbody.innerHTML = patients.map(p => `
-    <tr>
-      <td><strong>${p.first_name} ${p.last_name}</strong></td>
-      <td>${p.gender}</td>
-      <td>${p.blood_group || '—'}</td>
-      <td>${p.doctor_id ? 'Doctor #' + p.doctor_id : '—'}</td>
-    </tr>
-  `).join('');
+  tbody.innerHTML = patients.map(p => {
+    const doctor = doctorsList.find(d => d.id === p.doctor_id);
+    const doctorName = doctor
+      ? `${doctor.full_name} <span style="color:#999;font-size:12px;">(${doctor.specialty})</span>`
+      : '<span style="color:#999">Unassigned</span>';
+    return `
+      <tr>
+        <td><strong>${p.first_name} ${p.last_name}</strong></td>
+        <td>${p.gender}</td>
+        <td>${p.blood_group || '—'}</td>
+        <td>${doctorName}</td>
+      </tr>
+    `;
+  }).join('');
 }
 
 loadDashboard();
